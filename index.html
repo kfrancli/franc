@@ -3,293 +3,316 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>K. FRANCK — Portfolio en maintenance</title>
-<meta name="description" content="Le portfolio de K. FRANCK, administrateur système, est en cours de maintenance. Retour très bientôt.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+<title>K. FRANCK — Maintenance en cours</title>
+<meta name="description" content="Le portfolio de K. FRANCK, administrateur système, est en maintenance. Retour très bientôt.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230d1322'/><text x='50' y='66' font-size='52' text-anchor='middle' fill='%23ffb454' font-family='monospace' font-weight='700'>&gt;_</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #eeeafb;
-    --bg2: #e2f6ef;
-    --ink: #2b2a55;
-    --muted: #5b5a85;
-    --card: #ffffff;
-    --mint: #6fdcbb;
-    --coral: #ff8a7a;
-    --sun: #ffd65a;
-    --rack: #2b2a55;
-    --rack-line: #4a4985;
-    --floor: rgba(43, 42, 85, .10);
+    --bg: #0c1220;
+    --panel: #121a30;
+    --panel-2: #0a1020;
+    --line: #25305a;
+    --text: #d8e0f7;
+    --muted: #8591b8;
+    --amber: #ffb454;
+    --cyan: #5ccfe6;
+    --ok: #7fd99a;
+    --err: #ff7a86;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, "Liberation Mono", monospace;
+    --sans: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #1c1b3a;
-      --bg2: #17323a;
-      --ink: #f1efff;
-      --muted: #b9b7e0;
-      --card: #272652;
-      --rack: #14132b;
-      --rack-line: #3a3970;
-      --floor: rgba(0, 0, 0, .25);
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #1c1b3a; --bg2: #17323a; --ink: #f1efff; --muted: #b9b7e0;
-    --card: #272652; --rack: #14132b; --rack-line: #3a3970; --floor: rgba(0,0,0,.25);
-  }
-
   * { box-sizing: border-box; margin: 0; }
-  html, body { height: 100%; }
+  html { background: var(--bg); }
   body {
-    font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
-    color: var(--ink);
-    background: linear-gradient(160deg, var(--bg) 0%, var(--bg2) 100%) fixed;
-    display: grid;
-    place-items: center;
-    padding: 24px 20px;
+    min-height: 100vh;
+    color: var(--text);
+    font-family: var(--sans);
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(92, 207, 230, .10), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(255, 180, 84, .08), transparent 60%),
+      var(--bg);
     overflow-x: hidden;
   }
+  #net { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
 
-  main {
-    width: min(760px, 100%);
-    text-align: center;
+  .wrap {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 28px 24px 24px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 28px;
   }
 
-  .scene {
-    width: 100%;
-    max-width: 640px;
-    height: auto;
-    margin: 0 auto 8px;
-    display: block;
-    overflow: visible;
+  header {
+    display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .brand { font-family: var(--mono); font-weight: 700; font-size: 1.05rem; }
+  .brand span { color: var(--muted); font-weight: 400; }
+  .http {
+    font-family: var(--mono); font-size: .85rem;
+    border: 1px solid var(--amber); color: var(--amber);
+    padding: 6px 12px; border-radius: 6px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .http i { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); animation: pulse 1.4s ease-in-out infinite; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 40px;
+    align-items: center;
   }
 
   h1 {
-    font-family: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
-    font-weight: 600;
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    line-height: 1.1;
-    letter-spacing: -.01em;
-    margin: 8px 0 12px;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+    line-height: 1.02;
+    letter-spacing: -.025em;
+    margin-bottom: 18px;
   }
-  .lead {
-    color: var(--muted);
-    font-size: clamp(1rem, 2.4vw, 1.15rem);
-    line-height: 1.6;
-    max-width: 52ch;
-    margin: 0 auto 26px;
-  }
-  .lead strong { color: var(--ink); font-weight: 600; }
+  h1 .code { display: block; font-family: var(--mono); font-weight: 500; font-size: .32em; letter-spacing: 0; color: var(--amber); margin-bottom: 14px; }
+  .lead { color: var(--muted); line-height: 1.65; font-size: 1.08rem; max-width: 46ch; margin-bottom: 28px; }
+  .lead b { color: var(--text); font-weight: 500; }
 
-  .status {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--card);
-    border-radius: 999px;
-    padding: 12px 22px 12px 16px;
-    box-shadow: 0 6px 0 var(--floor);
-    font-weight: 600;
-    min-height: 52px;
-  }
-  .dot {
-    width: 12px; height: 12px; border-radius: 50%;
-    background: var(--mint);
-    animation: pulse 1.6s ease-in-out infinite;
-  }
-  #msg { min-width: 20ch; text-align: left; transition: opacity .25s; }
+  .services { list-style: none; padding: 0; display: grid; gap: 10px; max-width: 420px; font-family: var(--mono); font-size: .9rem; }
+  .services li { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: color-mix(in srgb, var(--panel) 80%, transparent); border: 1px solid var(--line); border-radius: 8px; }
+  .services .name { flex: 1; }
+  .services .st { color: var(--muted); }
+  .sd { width: 9px; height: 9px; border-radius: 50%; background: var(--ok); }
+  .services li.run .sd { background: var(--amber); animation: pulse 1.2s ease-in-out infinite; }
+  .services li.run .st { color: var(--amber); }
+  .services li.ok .st { color: var(--ok); }
 
-  .bar {
-    width: min(360px, 80%);
-    height: 12px;
-    background: var(--card);
-    border-radius: 999px;
-    margin: 26px auto 0;
+  .term {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .6);
     overflow: hidden;
-    box-shadow: inset 0 2px 0 var(--floor);
   }
-  .bar i {
-    display: block;
-    height: 100%;
-    width: 42%;
-    border-radius: 999px;
-    background: repeating-linear-gradient(-45deg, var(--mint) 0 12px, #8ee9cd 12px 24px);
-    background-size: 34px 34px;
-    animation: slide 2.6s ease-in-out infinite alternate, stripes 1s linear infinite;
+  .tbar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .tbar i { width: 11px; height: 11px; border-radius: 50%; background: #3a4578; }
+  .tbar i:nth-child(1) { background: #ff6b76; } .tbar i:nth-child(2) { background: var(--amber); } .tbar i:nth-child(3) { background: var(--ok); }
+  .tbar span { margin-left: 8px; font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+  #out {
+    font-family: var(--mono); font-size: clamp(.78rem, 1.6vw, .9rem); line-height: 1.75;
+    padding: 18px 18px 22px; min-height: 340px; white-space: pre-wrap; word-break: break-word;
+  }
+  #out .p { color: var(--cyan); }
+  #out .ok { color: var(--ok); }
+  #out .run { color: var(--amber); }
+  #out .dim { color: var(--muted); }
+  .cur { display: inline-block; width: .55em; height: 1.05em; background: var(--text); vertical-align: -.15em; animation: blink 1s steps(1) infinite; }
+
+  footer {
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    font-family: var(--mono); font-size: .82rem; color: var(--muted);
+    border-top: 1px solid var(--line); padding-top: 16px;
   }
 
-  footer { margin-top: 28px; color: var(--muted); font-size: .95rem; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes pulse { 50% { transform: scale(1.5); opacity: .55; } }
 
-  /* ----- animations ----- */
-  @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: .55; } }
-  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(138%); } }
-  @keyframes stripes { to { background-position: 34px 0; } }
-  @keyframes blink { 0%,45%,55%,100% { opacity: 1; } 50% { opacity: .15; } }
-  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-  @keyframes eyes { 0%,92%,100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
-  @keyframes wrench { 0%,100% { transform: rotate(-28deg); } 50% { transform: rotate(18deg); } }
-  @keyframes type { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-  @keyframes wifi { 0%,100% { opacity: .2; } 30% { opacity: 1; } }
-  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 
-  .led { animation: blink 1.4s infinite; }
-  .l2 { animation-delay: .35s; } .l3 { animation-delay: .7s; } .l4 { animation-delay: 1.05s; }
-  .char { animation: bob 2.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
-  .char.b { animation-delay: 1.1s; }
-  .eye { transform-box: fill-box; transform-origin: center; animation: eyes 4s infinite; }
-  .wrench { transform-box: fill-box; transform-origin: 85% 85%; animation: wrench 1s ease-in-out infinite; }
-  .cursor { animation: type 1s steps(1) infinite; }
-  .w1 { animation: wifi 1.8s infinite; } .w2 { animation: wifi 1.8s .3s infinite; } .w3 { animation: wifi 1.8s .6s infinite; }
-  .cloud { animation: float 4s ease-in-out infinite; transform-box: fill-box; }
-  .bubble { animation: float 3s ease-in-out infinite; transform-box: fill-box; }
-
-  :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
-
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; gap: 28px; }
+    #out { min-height: 300px; }
+  }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; }
-    .packet { display: none; }
   }
 </style>
 </head>
 <body>
-<main>
-  <svg class="scene" viewBox="0 0 640 340" role="img" aria-label="Deux techniciens réseau s’affairent autour d’une baie de serveurs">
-    <!-- sol -->
-    <ellipse cx="320" cy="312" rx="290" ry="18" fill="var(--floor)"/>
+<canvas id="net" aria-hidden="true"></canvas>
 
-    <!-- nuage + wifi -->
-    <g class="cloud">
-      <path d="M262 62a22 22 0 0 1 4-43 28 28 0 0 1 52-6 24 24 0 0 1 36 17 20 20 0 0 1-4 40z" fill="var(--card)"/>
-      <g fill="none" stroke="var(--mint)" stroke-width="5" stroke-linecap="round">
-        <path class="w3" d="M296 34a26 26 0 0 1 36 0"/>
-        <path class="w2" d="M303 42a16 16 0 0 1 22 0"/>
-      </g>
-      <circle class="w1" cx="314" cy="50" r="3.5" fill="var(--mint)"/>
-    </g>
+<div class="wrap">
+  <header>
+    <div class="brand">N'ZI K. FRANCK <span>/</span></div>
+    <div class="http"><i></i>HTTP 503 · maintenance</div>
+  </header>
 
-    <!-- câbles -->
-    <path id="c1" d="M214 292 C 244 330, 252 262, 280 262" fill="none" stroke="var(--coral)" stroke-width="6" stroke-linecap="round"/>
-    <path id="c2" d="M360 150 C 430 120, 436 214, 488 226" fill="none" stroke="var(--sun)" stroke-width="6" stroke-linecap="round"/>
-    <circle class="packet" r="5" fill="#fff" stroke="var(--coral)" stroke-width="2.5">
-      <animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#c1"/></animateMotion>
-    </circle>
-    <circle class="packet" r="5" fill="#fff" stroke="var(--sun)" stroke-width="2.5">
-      <animateMotion dur="2.6s" begin="0.4s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#c2"/></animateMotion>
-    </circle>
-    <circle class="packet" r="5" fill="#fff" stroke="var(--sun)" stroke-width="2.5">
-      <animateMotion dur="2.6s" begin="1.4s" repeatCount="indefinite"><mpath href="#c2"/></animateMotion>
-    </circle>
+  <main class="grid">
+    <section>
+      <h1><span class="code">$ systemctl status portfolio</span>Portfolio en maintenance.</h1>
+      <p class="lead">
+        Je mets à jour mon infrastructure et mon site. Le service est <b>temporairement arrêté</b>,
+        rien de grave : tout sera de nouveau en ligne très bientôt.
+      </p>
+      <ul class="services" aria-label="État des opérations">
+        <li class="ok"><span class="sd"></span><span class="name">Sauvegarde</span><span class="st">terminée</span></li>
+        <li class="ok"><span class="sd"></span><span class="name">Mises à jour système</span><span class="st">terminées</span></li>
+        <li class="run"><span class="sd"></span><span class="name">Déploiement</span><span class="st">en cours</span></li>
+      </ul>
+    </section>
 
-    <!-- baie serveurs -->
-    <g>
-      <rect x="272" y="86" width="96" height="214" rx="14" fill="var(--rack)"/>
-      <g stroke="var(--rack-line)" stroke-width="3" stroke-linecap="round">
-        <line x1="286" y1="136" x2="354" y2="136"/><line x1="286" y1="186" x2="354" y2="186"/><line x1="286" y1="236" x2="354" y2="236"/>
-      </g>
-      <g fill="var(--rack-line)">
-        <rect x="286" y="102" width="40" height="8" rx="4"/><rect x="286" y="152" width="40" height="8" rx="4"/>
-        <rect x="286" y="202" width="40" height="8" rx="4"/><rect x="286" y="252" width="40" height="8" rx="4"/>
-      </g>
-      <circle class="led" cx="342" cy="106" r="5" fill="var(--mint)"/>
-      <circle class="led l2" cx="356" cy="106" r="5" fill="var(--sun)"/>
-      <circle class="led l3" cx="342" cy="156" r="5" fill="var(--mint)"/>
-      <circle class="led l4" cx="356" cy="156" r="5" fill="var(--coral)"/>
-      <circle class="led l2" cx="342" cy="206" r="5" fill="var(--sun)"/>
-      <circle class="led" cx="356" cy="206" r="5" fill="var(--mint)"/>
-      <circle class="led l4" cx="342" cy="256" r="5" fill="var(--coral)"/>
-      <circle class="led l3" cx="356" cy="256" r="5" fill="var(--mint)"/>
-      <rect x="284" y="282" width="72" height="6" rx="3" fill="var(--rack-line)"/>
-    </g>
+    <section class="term" aria-label="Journal de maintenance">
+      <div class="tbar"><i></i><i></i><i></i><span>admin@serveur: ~</span></div>
+      <pre id="out" aria-live="off"></pre>
+    </section>
+  </main>
 
-    <!-- technicien gauche : casque + portable -->
-    <g class="char">
-      <rect x="92" y="212" width="62" height="86" rx="28" fill="var(--mint)"/>
-      <circle cx="123" cy="176" r="34" fill="#8d5a3b"/>
-      <path d="M91 170a32 32 0 0 1 64 0c-12-14-50-14-64 0z" fill="#2b2a55"/>
-      <path d="M89 176a34 34 0 0 1 68 0" fill="none" stroke="#2b2a55" stroke-width="5" stroke-linecap="round"/>
-      <rect x="82" y="172" width="12" height="24" rx="6" fill="var(--coral)"/>
-      <rect x="152" y="172" width="12" height="24" rx="6" fill="var(--coral)"/>
-      <path d="M92 196q4 18 26 18" fill="none" stroke="#2b2a55" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="118" cy="214" r="4" fill="#2b2a55"/>
-      <ellipse class="eye" cx="111" cy="178" rx="3.6" ry="4.4" fill="#2b2a55"/>
-      <ellipse class="eye" cx="135" cy="178" rx="3.6" ry="4.4" fill="#2b2a55"/>
-      <circle cx="101" cy="188" r="5" fill="#ff8a7a" opacity=".55"/>
-      <circle cx="145" cy="188" r="5" fill="#ff8a7a" opacity=".55"/>
-      <path d="M115 190q8 7 16 0" fill="none" stroke="#2b2a55" stroke-width="3" stroke-linecap="round"/>
-    </g>
-    <!-- portable -->
-    <g>
-      <rect x="140" y="268" width="84" height="12" rx="6" fill="var(--rack-line)"/>
-      <rect x="150" y="226" width="64" height="46" rx="8" fill="var(--rack)"/>
-      <text x="160" y="256" font-family="ui-monospace, Consolas, monospace" font-size="15" font-weight="700" fill="var(--mint)">&gt;_<tspan class="cursor">▌</tspan></text>
-    </g>
-
-    <!-- technicien droit : casque de chantier + clé -->
-    <rect x="474" y="268" width="74" height="40" rx="8" fill="var(--sun)"/>
-    <rect x="474" y="268" width="74" height="10" rx="5" fill="#e9b93a"/>
-    <g class="char b">
-      <rect x="480" y="190" width="62" height="86" rx="28" fill="var(--coral)"/>
-      <circle cx="511" cy="156" r="34" fill="#f6c8a0"/>
-      <path d="M475 150a36 34 0 0 1 72 0z" fill="var(--sun)"/>
-      <rect x="469" y="146" width="84" height="9" rx="4.5" fill="#e9b93a"/>
-      <rect x="505" y="114" width="12" height="14" rx="4" fill="#e9b93a"/>
-      <ellipse class="eye" cx="499" cy="164" rx="3.6" ry="4.4" fill="#2b2a55"/>
-      <ellipse class="eye" cx="523" cy="164" rx="3.6" ry="4.4" fill="#2b2a55"/>
-      <circle cx="489" cy="174" r="5" fill="#ff8a7a" opacity=".55"/>
-      <circle cx="533" cy="174" r="5" fill="#ff8a7a" opacity=".55"/>
-      <path d="M503 175q8 7 16 0" fill="none" stroke="#2b2a55" stroke-width="3" stroke-linecap="round"/>
-      <!-- clé à molette -->
-      <g class="wrench">
-        <rect x="548" y="150" width="9" height="56" rx="4.5" fill="#c8c6ee"/>
-        <path d="M542 148a10 10 0 0 1 21 0v6h-6v-5a4 4 0 0 0-9 0v5h-6z" fill="#c8c6ee"/>
-      </g>
-    </g>
-
-    <!-- bulle -->
-    <g class="bubble">
-      <rect x="396" y="40" width="112" height="40" rx="20" fill="var(--card)"/>
-      <path d="M430 80l-8 14 20-12z" fill="var(--card)"/>
-      <text x="452" y="66" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-size="17" font-weight="500" fill="var(--ink)">ping… ok !</text>
-    </g>
-  </svg>
-
-  <h1>Je remets mon portfolio au propre</h1>
-  <p class="lead">
-    Le portfolio de <strong>K. FRANCK</strong>, administrateur système, est en cours de maintenance.
-    Les techniciens vérifient les câbles, je reviens très bientôt.
-  </p>
-
-  <div class="status" role="status">
-    <span class="dot" aria-hidden="true"></span>
-    <span id="msg">Branchement des câbles…</span>
-  </div>
-
-  <div class="bar" aria-hidden="true"><i></i></div>
-
-  <footer>Merci de votre patience et à très vite !</footer>
-</main>
+  <footer>
+    <span>Merci de votre patience.</span>
+    <span id="clock">--:--:--</span>
+  </footer>
+</div>
 
 <script>
-  (function () {
-    var steps = [
-      "Branchement des câbles…",
-      "Mise à jour des serveurs…",
-      "Test de la connexion…",
-      "Dernières vérifications…"
-    ];
-    var el = document.getElementById("msg");
-    var i = 0;
-    setInterval(function () {
-      el.style.opacity = 0;
-      setTimeout(function () {
-        i = (i + 1) % steps.length;
-        el.textContent = steps[i];
-        el.style.opacity = 1;
-      }, 250);
-    }, 2800);
-  })();
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Terminal ---------- */
+  var out = document.getElementById("out");
+  var script = [
+    { k: "cmd", t: "ssh admin@portfolio" },
+    { k: "dim", t: "Connexion établie." },
+    { k: "cmd", t: "sudo systemctl stop portfolio.service" },
+    { k: "ok",  t: "Service arrêté, page de maintenance active." },
+    { k: "cmd", t: "apt update && apt upgrade -y" },
+    { k: "ok",  t: "Paquets à jour." },
+    { k: "cmd", t: "./backup.sh --all" },
+    { k: "ok",  t: "Sauvegarde terminée." },
+    { k: "cmd", t: "./deploy.sh --version nouvelle" },
+    { k: "run", t: "Déploiement en cours…" }
+  ];
+  var cursor = '<span class="cur"></span>';
+
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function line(item, text) {
+    var t = esc(text);
+    if (item.k === "cmd") return '<span class="p">$</span> ' + t;
+    if (item.k === "ok")  return '<span class="ok">[ ok ]</span> ' + t;
+    if (item.k === "run") return '<span class="run">[ .. ]</span> ' + t;
+    return '<span class="dim">' + t + '</span>';
+  }
+
+  function renderAll() {
+    out.innerHTML = script.map(function (i) { return line(i, i.t); }).join("\n") + "\n" + '<span class="p">$</span> ' + cursor;
+  }
+
+  function play() {
+    var done = [], idx = 0;
+    function draw(current) {
+      out.innerHTML = done.concat(current ? [current] : []).join("\n") + (current ? "" : "") + cursor;
+    }
+    function next() {
+      if (idx >= script.length) {
+        setTimeout(function () { out.innerHTML = cursor; setTimeout(play, 600); }, 4500);
+        return;
+      }
+      var item = script[idx++];
+      if (item.k === "cmd") {
+        var n = 0;
+        (function type() {
+          n++;
+          draw(line(item, item.t.slice(0, n)));
+          if (n < item.t.length) setTimeout(type, 28 + Math.random() * 40);
+          else { done.push(line(item, item.t)); setTimeout(next, 380); }
+        })();
+      } else {
+        done.push(line(item, item.t));
+        draw();
+        setTimeout(next, item.k === "run" ? 0 : 520);
+      }
+    }
+    next();
+  }
+  if (reduce) renderAll(); else play();
+
+  /* ---------- Horloge ---------- */
+  var clock = document.getElementById("clock");
+  function tick() {
+    var d = new Date(), p = function (n) { return String(n).padStart(2, "0"); };
+    clock.textContent = "heure du serveur " + p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds());
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---------- Réseau en fond ---------- */
+  var cv = document.getElementById("net"), cx = cv.getContext("2d");
+  var W, H, nodes = [], packets = [], DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var LINK = 150;
+
+  function resize() {
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * DPR; cv.height = H * DPR;
+    cx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    var count = Math.round(Math.min(60, Math.max(22, (W * H) / 26000)));
+    nodes = [];
+    for (var i = 0; i < count; i++) {
+      nodes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22 });
+    }
+    packets = [];
+    if (reduce) frame();
+  }
+
+  function neighbors(a) {
+    var r = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var b = nodes[i]; if (b === a) continue;
+      var dx = a.x - b.x, dy = a.y - b.y;
+      if (dx * dx + dy * dy < LINK * LINK) r.push(b);
+    }
+    return r;
+  }
+
+  var last = 0, spawn = 0;
+  function frame(ts) {
+    ts = ts || 0;
+    var dt = Math.min(ts - last, 50); last = ts;
+    cx.clearRect(0, 0, W, H);
+
+    for (var i = 0; i < nodes.length; i++) {
+      var a = nodes[i];
+      if (!reduce) {
+        a.x += a.vx * dt * .06 * 16 / 16; a.y += a.vy * dt * .06 * 16 / 16;
+        if (a.x < -20) a.x = W + 20; if (a.x > W + 20) a.x = -20;
+        if (a.y < -20) a.y = H + 20; if (a.y > H + 20) a.y = -20;
+      }
+      for (var j = i + 1; j < nodes.length; j++) {
+        var b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy);
+        if (d < LINK) {
+          cx.strokeStyle = "rgba(92,207,230," + (0.16 * (1 - d / LINK)).toFixed(3) + ")";
+          cx.lineWidth = 1;
+          cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(b.x, b.y); cx.stroke();
+        }
+      }
+    }
+    for (var k = 0; k < nodes.length; k++) {
+      cx.fillStyle = "rgba(133,145,184,.55)";
+      cx.beginPath(); cx.arc(nodes[k].x, nodes[k].y, 2, 0, 6.2832); cx.fill();
+    }
+
+    if (!reduce) {
+      spawn += dt;
+      if (spawn > 350 && packets.length < 14) {
+        spawn = 0;
+        var s = nodes[(Math.random() * nodes.length) | 0], nb = neighbors(s);
+        if (nb.length) packets.push({ a: s, b: nb[(Math.random() * nb.length) | 0], t: 0, amber: Math.random() < .25 });
+      }
+      for (var p = packets.length - 1; p >= 0; p--) {
+        var pk = packets[p]; pk.t += dt / 900;
+        if (pk.t >= 1) { packets.splice(p, 1); continue; }
+        var x = pk.a.x + (pk.b.x - pk.a.x) * pk.t, y = pk.a.y + (pk.b.y - pk.a.y) * pk.t;
+        cx.fillStyle = pk.amber ? "rgba(255,180,84,.95)" : "rgba(92,207,230,.95)";
+        cx.beginPath(); cx.arc(x, y, 2.8, 0, 6.2832); cx.fill();
+      }
+      requestAnimationFrame(frame);
+    }
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+  if (!reduce) requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>
